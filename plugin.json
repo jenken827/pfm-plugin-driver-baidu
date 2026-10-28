@@ -1,0 +1,8 @@
+{
+  "kind": "driver",
+  "driver_id": "baidu",
+  "exec": "./pfm-plugin-driver-baidu",
+  "abi_version": 1,
+  "name": "pfm-plugin-driver-baidu",
+  "version": "1.0.0"
+}
