@@ -1,12 +1,12 @@
 # pfm-plugin-driver-baidu
 
-百度网盘存储驱动，pfm 的官方插件（独立进程）。
+百度网盘存储驱动，[pfm](https://github.com/jenken827/pfm) 的官方插件（独立进程）。
 部分方法的实现参考了[OpenList](https://github.com/OpenListTeam/OpenList)
 
 ## 这是什么
 
-pfm 核心只内置 `local`；其余网盘以**独立进程插件**提供，通过 loopback RPC 与宿主通信
-（协议定义在 pfm 仓库的 `proto/wsp/plugin/driver.proto`，实现参考 `plugin/sdk`）。
+[pfm](https://github.com/jenken827/pfm) 核心只内置 `local`；其余网盘以**独立进程插件**提供，通过 loopback RPC 与宿主通信
+（协议定义在 `pfm-plugin-sdk` 仓库的 `proto/plugin` 与 `proto/abi`，SDK 侧实现在 `plugin/sdk`）。
 
 ⚠️ 插件与宿主**同权限**运行：能读宿主的 `config.yaml`（含全部 token）与 `data/`。
 只安装官方发布或自己构建的二进制。
@@ -16,7 +16,7 @@ pfm 核心只内置 `local`；其余网盘以**独立进程插件**提供，通�
 百度网盘 OpenAPI 的正常玩法是自己到[百度开放平台](https://pan.baidu.com/union/console/applist)
 建应用，拿 `Client ID` + `Client Secret`，再走 OAuth 换 `refresh_token`。**没有这些凭据的用户
 可以直接用 OpenList 的公开授权系统：<https://api.oplist.org/>** —— 在页面上选百度网盘、扫码授权，
-把得到的 `refresh_token` 填进 pfm 即可，插件会通过 OpenList 的续期接口自动刷新令牌。
+把得到的 `refresh_token` 填进 [pfm](https://github.com/jenken827/pfm) 即可，插件会通过 OpenList 的续期接口自动刷新令牌。
 
 驱动有两条续期路径，二选一（元数据里的「续期服务地址」决定走哪条）：
 
@@ -74,7 +74,7 @@ go work init . ../pfm-plugin-sdk
 
 ## 安装
 
-目录布局（放到 pfm 的 `plugin.dir` 下）：
+目录布局（放到 [pfm](https://github.com/jenken827/pfm) 的 `plugin.dir` 下）：
 
 ```
 plugins/pfm-plugin-driver-baidu/
@@ -137,4 +137,4 @@ scripts/make-index-entries.sh --version 1.0.0 --tag v1.0.0 \
 
 ## 许可
 
-与 pfm 主仓库一致（AGPL-3.0）。分发二进制时须同时提供对应源码。
+与 [pfm 主仓库](https://github.com/jenken827/pfm) 一致（AGPL-3.0）。分发二进制时须同时提供对应源码。
